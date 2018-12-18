@@ -3,14 +3,22 @@ class DocsController < ApplicationController
 before_action :find_doc, only: [:show,:edit,:update,:destroy]
 	
 	def index
-		@docs = Doc.where(user_id: current_user)
+		if (user_signed_in?)
+			@docs = Doc.where(user_id: current_user)
+		else
+			redirect_to new_user_session_path
+		end
 	end
 
 	def show
 	end
 
 	def new
-		@doc = current_user.docs.build
+		if (user_signed_in?)
+			@doc = current_user.docs.build
+		else
+			redirect_to new_user_session_path
+		end
 	end
 
 	def create
@@ -42,7 +50,11 @@ before_action :find_doc, only: [:show,:edit,:update,:destroy]
 private 
 	
 	def find_doc
+		if (user_signed_in?)
 		@doc = Doc.find(params[:id])
+		else
+			redirect_to new_user_session_path
+		end
 	end
 
 	def doc_params

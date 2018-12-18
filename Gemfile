@@ -57,4 +57,7 @@ gem 'simple_form', '~> 3.5'
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'devise', '~> 4.5'
 
-gem 'therubyracer'
+gem 'mini_racer'
+
+gem 'bootstrap', '~> 4.0.0'
+gem 'jquery-rails'
